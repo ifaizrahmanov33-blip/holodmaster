@@ -1,121 +1,3 @@
-<!-- Интерактивный подбор по площади -->
-    <section class="quick-filter">
-        <h3>Быстрый подбор оборудования по площади:</h3>
-        <div class="area-grid">
-            <button class="area-card" onclick="showResult('20', 'Рекомендуемая мощность: 07 (до 2.0 кВт / 7000 BTU). Оптимально для кухонь и небольших спален.')">До 20 м²</button>
-            <button class="area-card" onclick="showResult('25', 'Рекомендуемая мощность: 09 (до 2.5 кВт / 9000 BTU). Самый востребованный вариант для стандартных комнат.')">До 25 м²</button>
-            <button class="area-card" onclick="showResult('35', 'Рекомендуемая мощность: 12 (до 3.5 кВт / 12000 BTU). Отлично подходит для больших гостиных и студий.')">До 35 м²</button>
-        </div>
-        <div id="result" class="result-box"></div>
-    </section>
-
-    <!-- Блок преимуществ -->
-    <section class="advantages">
-        <h2 class="section-title">Почему выбирают нас</h2>
-        <div class="adv-grid">
-            <div class="adv-item">
-                <h4>Чистый монтаж</h4>
-                <p>Используем профессиональный инструмент со сбором пыли. Оставляем после себя идеальный порядок.</p>
-            </div>
-            <div class="adv-item">
-                <h4>Гарантия качества</h4>
-                <p>Официальный договор на монтажные работы и технику. Честная гарантия на узлы и соединения.</p>
-            </div>
-            <div class="adv-item">
-                <h4>Опыт более 10 лет</h4>
-                <p>Решаем задачи любой сложности: от стандартной установки в квартире до сложных мульти-систем на стадии ремонта.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Каталог товаров по площади -->
-    <section class="catalog">
-        <h2 class="section-title">Надежные решения для дома</h2>
-        <div class="catalog-grid">
-            
-            <!-- Карточка 1 -->
-            <div class="product-card">
-                <div>
-                    <span class="tag-area">Площадь до 20 м²</span>
-                    <h3 class="product-title">Сплит-система Настенная 07</h3>
-                    <ul class="product-features">
-                        <li>Энергоэффективность класса А</li>
-                        <li>Низкий уровень шума (от 22 дБ)</li>
-                        <li>Режимы: охлаждение / обогрев</li>
-                        <li>Тройная фильтрация воздуха</li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="price-box">
-                        <span class="price-label">Цена с установкой:</span>
-                        <span class="price-value">от 28 000 ₽</span>
-                    </div>
-                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
-                </div>
-            </div>
-
-            <!-- Карточка 2 -->
-            <div class="product-card">
-                <div>
-                    <span class="tag-area">Площадь до 25 м²</span>
-                    <h3 class="product-title">Сплит-система Настенная 09</h3>
-                    <ul class="product-features">
-                        <li>Компрессор повышенной надежности</li>
-                        <li>Быстрое охлаждение Turbo</li>
-                        <li>Ночной режим сна (Sleep)</li>
-                        <li>Скрытый LED-дисплей</li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="price-box">
-                        <span class="price-label">Цена с установкой:</span>
-                        <span class="price-value">от 32 000 ₽</span>
-                    </div>
-                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
-                </div>
-            </div>
-<!-- Карточка 3 -->
-            <div class="product-card">
-                <div>
-                    <span class="tag-area">Площадь до 35 м²</span>
-                    <h3 class="product-title">Сплит-система Настенная 12</h3>
-                    <ul class="product-features">
-                        <li>Высокая производительность</li>
-                        <li>Авторестарт при сбоях сети</li>
-                        <li>Увеличенная длина трассы</li>
-                        <li>Антикоррозийное покрытие</li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="price-box">
-                        <span class="price-label">Цена с установкой:</span>
-                        <span class="price-value">от 38 000 ₽</span>
-                    </div>
-                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Подвал -->
-    <footer>
-        <p>&copy; 2026 Climat Master — Профессиональный климат в Казани. Все права защищены.</p>
-    </footer>
-
-    <script>
-        function showResult(area, text) {
-            document.querySelectorAll('.area-card').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            const resultBox = document.getElementById('result');
-            resultBox.innerHTML = '<strong>Для площади ' + area + ' м²:</strong><br>' + text;
-            resultBox.style.display = 'block';
-        }
-    </script>
-
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -137,6 +19,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -149,7 +32,7 @@
         header {
             background-color: var(--primary-blue);
             color: white;
-            padding: 18px 20px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -159,8 +42,22 @@
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
 
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo-mini {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--accent-gold);
+            object-fit: cover;
+        }
+
         .logo {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
             letter-spacing: 1.5px;
         }
@@ -173,9 +70,9 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 14px;
             border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 6px;
             transition: all 0.3s;
         }
@@ -183,6 +80,7 @@
         .header-contacts a:hover {
             border-color: var(--accent-gold);
             color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
         /* Премиальный главный экран (Hero-блок) */
@@ -225,7 +123,7 @@
             margin: 0 auto 35px auto;
         }
 
-        /* Вывод премиального логотипа сбоку */
+        /* Интеграция нового логотипа 1000411534_2.png */
         .hero-image-wrapper {
             flex: 1;
             display: flex;
@@ -236,20 +134,20 @@
         }
 
         .hero-logo-img {
-            max-width: 280px;
+            max-width: 290px;
             width: 100%;
             height: auto;
             border-radius: 50%;
-            box-shadow: 0 0 35px rgba(0, 136, 204, 0.4), 0 0 15px rgba(212, 175, 55, 0.2);
-            border: 3px solid rgba(212, 175, 55, 0.3);
-            transition: transform 0.5s ease;
+            box-shadow: 0 0 40px rgba(0, 136, 204, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
+            border: 3px solid rgba(212, 175, 55, 0.4);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
         }
 
         .hero-logo-img:hover {
-            transform: scale(1.03) rotate(2deg);
+            transform: scale(1.04) rotate(1deg);
+            box-shadow: 0 0 50px rgba(0, 136, 204, 0.7), 0 0 25px rgba(212, 175, 55, 0.5);
         }
-
-        /* Кнопки связи */
+/* Кнопки связи */
         .cta-buttons {
             display: flex;
             flex-direction: column;
@@ -269,7 +167,8 @@
             transition: all 0.25s ease;
             cursor: pointer;
         }
-.btn-telegram {
+
+        .btn-telegram {
             background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
             color: white;
             box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
@@ -289,6 +188,7 @@
         .btn-phone:hover {
             background-color: rgba(212, 175, 55, 0.1);
             transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
         }
 
         /* Блок быстрого подбора по площади */
@@ -397,8 +297,7 @@
             max-width: 1000px;
             margin: 0 auto;
         }
-
-        .catalog-grid {
+.catalog-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 25px;
@@ -416,11 +315,13 @@
             transition: all 0.3s ease;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.06);
+        .product-card.highlight {
+            border-color: #0088cc;
+            box-shadow: 0 0 20px rgba(0, 136, 204, 0.2);
+            transform: scale(1.02);
         }
-.tag-area {
+
+        .tag-area {
             display: inline-block;
             background: #E0F2FE;
             color: #0369A1;
@@ -515,6 +416,8 @@
             .hero h1 { font-size: 44px; }
             .hero p { margin: 0 0 35px 0; font-size: 18px; }
             .hero-logo-img { max-width: 360px; }
+            .logo { font-size: 24px; }
+            .header-contacts a { font-size: 16px; }
             .cta-buttons { flex-direction: row; max-width: none; justify-content: flex-start; }
             .btn { width: 230px; }
             .adv-grid { grid-template-columns: repeat(3, 1fr); }
@@ -527,13 +430,15 @@
 
     <!-- Шапка сайта -->
     <header>
-        <div class="logo">CLIMAT <span>MASTER</span></div>
+        <div class="brand-wrapper">
+            <img src="logo.png" alt="Climat Master" class="header-logo-mini">
+            <div class="logo">CLIMAT <span>MASTER</span></div>
+        </div>
         <div class="header-contacts">
             <a href="tel:+79872756731">+7 (987) 275-67-31</a>
         </div>
     </header>
-
-    <!-- Премиальный главный баннер -->
+<!-- Премиальный главный баннер -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
@@ -546,18 +451,19 @@
                 </div>
             </div>
             <div class="hero-image-wrapper">
-                <!-- Сюда выводится ваш круглый сочный логотип -->
-                <img src="logo.jpg" alt="Climat Master" class="hero-logo-img">
+                <!-- Новый премиальный круглый логотип -->
+                <img src="logo.png" alt="Climat Master" class="hero-logo-img">
             </div>
         </div>
     </section>
-<!-- Интерактивный подбор по площади -->
+
+    <!-- Интерактивный подбор по площади -->
     <section class="quick-filter">
         <h3>Быстрый подбор оборудования по площади:</h3>
         <div class="area-grid">
-            <button class="area-card" onclick="showResult('20', 'Рекомендуемая мощность: 07 (до 2.0 кВт / 7000 BTU). Оптимально для кухонь и небольших спален.')">До 20 м²</button>
-            <button class="area-card" onclick="showResult('25', 'Рекомендуемая мощность: 09 (до 2.5 кВт / 9000 BTU). Самый востребованный вариант для стандартных комнат.')">До 25 м²</button>
-            <button class="area-card" onclick="showResult('35', 'Рекомендуемая мощность: 12 (до 3.5 кВт / 12000 BTU). Отлично подходит для больших гостиных и студий.')">До 35 м²</button>
+            <button class="area-card" onclick="selectProduct(0, '20', 'Рекомендуемая мощность: 07 (до 2.0 кВт / 7000 BTU). Оптимально для кухонь и небольших спален.')">До 20 м²</button>
+            <button class="area-card" onclick="selectProduct(1, '25', 'Рекомендуемая мощность: 09 (до 2.5 кВт / 9000 BTU). Самый востребованный вариант для стандартных комнат.')">До 25 м²</button>
+            <button class="area-card" onclick="selectProduct(2, '35', 'Рекомендуемая мощность: 12 (до 3.5 кВт / 12000 BTU). Отлично подходит для больших гостиных и студий.')">До 35 м²</button>
         </div>
         <div id="result" class="result-box"></div>
     </section>
@@ -582,7 +488,7 @@
     </section>
 
     <!-- Каталог товаров по площади -->
-    <section class="catalog">
+    <section id="catalog-section" class="catalog">
         <h2 class="section-title">Надежные решения для дома</h2>
         <div class="catalog-grid">
             
@@ -609,7 +515,7 @@
 
             <!-- Карточка 2 -->
             <div class="product-card">
-                <div>
+<div>
                     <span class="tag-area">Площадь до 25 м²</span>
                     <h3 class="product-title">Сплит-система Настенная 09</h3>
                     <ul class="product-features">
@@ -627,7 +533,8 @@
                     <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
                 </div>
             </div>
-<!-- Карточка 3 -->
+
+            <!-- Карточка 3 -->
             <div class="product-card">
                 <div>
                     <span class="tag-area">Площадь до 35 м²</span>
@@ -657,13 +564,27 @@
     </footer>
 
     <script>
-        function showResult(area, text) {
+        function selectProduct(cardIndex, area, text) {
+            // Подсветка активной кнопки
             document.querySelectorAll('.area-card').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
+            // Вывод описания
             const resultBox = document.getElementById('result');
             resultBox.innerHTML = '<strong>Для площади ' + area + ' м²:</strong><br>' + text;
             resultBox.style.display = 'block';
+
+            // Сброс старой подсветки карточек
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => card.classList.remove('highlight'));
+
+            // Подсветка выбранной карточки и скролл к ней
+            if(cards[cardIndex]) {
+                cards[cardIndex].classList.add('highlight');
+                setTimeout(() => {
+                    cards[cardIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 150);
+            }
         }
     </script>
 
