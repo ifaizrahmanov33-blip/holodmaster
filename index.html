@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holod Master — Продажа и монтаж кондиционеров в Казани</title>
+    <style>
+        :root {
+            --primary-blue: #0A192F;
+            --accent-gold: #D4AF37;
+            --light-bg: #F8F9FA;
+            --text-dark: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        .header-contacts a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 15px;
+            font-size: 16px;
+        }
+
+        /* Главный экран (Hero-блок) */
+        .hero {
+            background: linear-gradient(135deg, #0A192F 0%, #172A45 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #8892B0;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        /* Кнопки связи */
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: block;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+        }
+
+        .btn-phone {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+        }
+
+        /* Блок быстрого подбора по площади */
+        .quick-filter {
+            background: white;
+            border-radius: 12px;
+            padding: 25px 20px;
+            margin: -20px auto 40px auto;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            width: 90%;
+        }
+
+        .quick-filter h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--primary-blue);
+        }
+
+        .area-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .area-card {
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            padding: 12px 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+            background: none;
+            width: 100%;
+        }
+
+        .area-card:hover, .area-card.active {
+            border-color: var(--primary-blue);
+            background-color: rgba(10, 25, 47, 0.05);
+            color: var(--primary-blue);
+        }
+.result-box {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #F0F4F8;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+        }
+
+        /* Адаптивность для ПК */
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .cta-buttons { flex-direction: row; max-width: 500px; justify-content: center; }
+            .btn { width: 220px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="logo">HOLOD <span>MASTER</span></div>
+        <div class="header-contacts">
+            <!-- Замените +79991112233 на ваш реальный номер телефона -->
+            <a href="tel:+79991112233">+7 (999) 111-22-33</a>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <h1>Продажа и монтаж кондиционеров в Казани</h1>
+        <p>Профессиональный подбор климатического оборудования под ключ. Чистый монтаж за 1 день с гарантией на работу.</p>
+        
+        <div class="cta-buttons">
+            <!-- Замените 79991112233 на ваш номер WhatsApp без плюса -->
+            <a href="https://wa.me/79991112233?text=Здравствуйте!%20Нужен%20кондиционер." class="btn btn-whatsapp" target="_blank">Написать в WhatsApp</a>
+            <a href="tel:+79991112233" class="btn btn-phone">Позвонить инженеру</a>
+        </div>
+    </section>
+
+    <!-- Интерактивный калькулятор подбора -->
+    <section class="quick-filter">
+        <h3>Выберите площадь вашего помещения:</h3>
+        <div class="area-grid">
+            <button class="area-card" onclick="showResult('20', 'Рекомендуемая мощность: 07 (до 2.0 кВт / 7000 BTU). Идеально для небольших комнат и кухонь.')">До 20 м²</button>
+            <button class="area-card" onclick="showResult('25', 'Рекомендуемая мощность: 09 (до 2.5 кВт / 9000 BTU). Самый популярный размер для спален и гостиных.')">До 25 м²</button>
+            <button class="area-card" onclick="showResult('35', 'Рекомендуемая мощность: 12 (до 3.5 кВт / 12000 BTU). Подходит для просторных залов или студий.')">До 35 м²</button>
+        </div>
+        <div id="result" class="result-box"></div>
+    </section>
+
+    <script>
+        function showResult(area, text) {
+            // Убираем активный класс у всех кнопок
+            document.querySelectorAll('.area-card').forEach(btn => btn.classList.remove('active'));
+            
+            // Добавляем активный класс нажатой кнопке
+            event.target.classList.add('active');
+            
+            // Показываем результат подбора
+            const resultBox = document.getElementById('result');
+            resultBox.innerHTML = '<strong>Для площади ' + area + ' м²:</strong><br>' + text;
+            resultBox.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
