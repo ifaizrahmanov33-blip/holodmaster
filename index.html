@@ -10,6 +10,7 @@
             --accent-gold: #D4AF37;
             --light-bg: #F8F9FA;
             --text-dark: #333333;
+            --card-border: #E2E8F0;
         }
 
         * {
@@ -36,6 +37,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .logo {
@@ -52,7 +54,6 @@
             color: white;
             text-decoration: none;
             font-weight: bold;
-            margin-left: 15px;
             font-size: 16px;
         }
 
@@ -60,12 +61,12 @@
         .hero {
             background: linear-gradient(135deg, #0A192F 0%, #172A45 100%);
             color: white;
-            padding: 60px 20px;
+            padding: 70px 20px 50px 20px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 36px;
+            font-size: 34px;
             margin-bottom: 15px;
             line-height: 1.2;
         }
@@ -88,13 +89,14 @@
 
         .btn {
             display: block;
-            padding: 15px 20px;
+            padding: 14px 20px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
             text-align: center;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.2s;
+            cursor: pointer;
         }
 
         .btn:active {
@@ -106,10 +108,18 @@
             color: white;
         }
 
+        .btn-whatsapp:hover {
+            background-color: #20ba56;
+        }
+
         .btn-phone {
             background-color: transparent;
             color: var(--accent-gold);
             border: 2px solid var(--accent-gold);
+        }
+
+        .btn-phone:hover {
+            background-color: rgba(212, 175, 55, 0.1);
         }
 
         /* Блок быстрого подбора по площади */
@@ -117,11 +127,12 @@
             background: white;
             border-radius: 12px;
             padding: 25px 20px;
-            margin: -20px auto 40px auto;
-            max-width: 500px;
+            margin: -30px auto 40px auto;
+            max-width: 600px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             position: relative;
             width: 90%;
+            text-align: center;
         }
 
         .quick-filter h3 {
@@ -144,76 +155,315 @@
             font-weight: 600;
             font-size: 14px;
             transition: all 0.2s;
-            background: none;
-            width: 100%;
+            background: white;
+            color: var(--text-dark);
         }
-
-        .area-card:hover, .area-card.active {
+.area-card:hover, .area-card.active {
             border-color: var(--primary-blue);
             background-color: rgba(10, 25, 47, 0.05);
             color: var(--primary-blue);
         }
-.result-box {
+
+        .result-box {
             margin-top: 15px;
-            padding: 10px;
+            padding: 12px;
             background-color: #F0F4F8;
             border-radius: 6px;
             font-size: 14px;
             font-weight: 500;
             display: none;
+            border-left: 4px solid var(--accent-gold);
+            text-align: left;
         }
 
-        /* Адаптивность для ПК */
+        /* Секция преимуществ */
+        .advantages {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            color: var(--primary-blue);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .adv-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .adv-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-top: 3px solid var(--primary-blue);
+        }
+
+        .adv-item h4 {
+            color: var(--primary-blue);
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        /* Каталог оборудования */
+        .catalog {
+            padding: 40px 20px 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
+        }
+
+        .tag-area {
+            display: inline-block;
+            background: #EBF8FF;
+            color: #2B6CB0;
+            font-weight: bold;
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 50px;
+            margin-bottom: 12px;
+            align-self: flex-start;
+        }
+
+        .product-title {
+            font-size: 20px;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #4A5568;
+        }
+
+        .product-features li {
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 18px;
+        }
+
+        .product-features li::before {
+            content: "✓";
+            color: #25D366;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .price-box {
+            border-top: 1px solid #EDF2F7;
+            padding-top: 15px;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .price-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: var(--primary-blue);
+        }
+
+        .btn-order {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            border-radius: 6px;
+            margin-top: 15px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: bold;
+        }
+/* Подвал */
+        footer {
+            background-color: var(--primary-blue);
+            color: #8892B0;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 14px;
+            border-top: 3px solid var(--accent-gold);
+        }
+
+        /* Адаптивность под ПК */
         @media (min-width: 768px) {
-            .hero h1 { font-size: 48px; }
+            .hero h1 { font-size: 46px; }
             .cta-buttons { flex-direction: row; max-width: 500px; justify-content: center; }
             .btn { width: 220px; }
+            .adv-grid { grid-template-columns: repeat(3, 1fr); }
+            .catalog-grid { grid-template-columns: repeat(3, 1fr); }
+            .section-title { font-size: 32px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Шапка -->
+    <!-- Шапка сайта -->
     <header>
         <div class="logo">HOLOD <span>MASTER</span></div>
         <div class="header-contacts">
-            <!-- Замените +79872756731 на ваш реальный номер телефона -->
-            <a href="tel:+79872756731">+7 9872756731</a>
+            <a href="tel:+79872756731">+7 (987) 275-67-31</a>
         </div>
     </header>
 
     <!-- Главный баннер -->
     <section class="hero">
         <h1>Продажа и монтаж кондиционеров в Казани</h1>
-        <p>Профессиональный подбор климатического оборудования под ключ. Чистый монтаж за 1 день с гарантией на работу.</p>
+        <p>Профессиональный подбор климатического оборудования под ключ. Чистый монтаж без пыли за 1 день с гарантией на работу.</p>
         
         <div class="cta-buttons">
-            <!-- Замените 79872756731 на ваш номер WhatsApp без плюса -->
-            <a href="https://wa.me/79872756731?text=Здравствуйте!%20Нужен%20кондиционер." class="btn btn-whatsapp" target="_blank">Написать в WhatsApp</a>
+            <a href="https://wa.me/79872756731?text=Здравствуйте!%20Нужен%20подбор%20кондиционера." class="btn btn-whatsapp" target="_blank">Написать в WhatsApp</a>
             <a href="tel:+79872756731" class="btn btn-phone">Позвонить инженеру</a>
         </div>
     </section>
 
-    <!-- Интерактивный калькулятор подбора -->
+    <!-- Интерактивный подбор по площади -->
     <section class="quick-filter">
-        <h3>Выберите площадь вашего помещения:</h3>
+        <h3>Быстрый подбор оборудования по площади:</h3>
         <div class="area-grid">
-            <button class="area-card" onclick="showResult('20', 'Рекомендуемая мощность: 07 (до 2.0 кВт / 7000 BTU). Идеально для небольших комнат и кухонь.')">До 20 м²</button>
-            <button class="area-card" onclick="showResult('25', 'Рекомендуемая мощность: 09 (до 2.5 кВт / 9000 BTU). Самый популярный размер для спален и гостиных.')">До 25 м²</button>
-            <button class="area-card" onclick="showResult('35', 'Рекомендуемая мощность: 12 (до 3.5 кВт / 12000 BTU). Подходит для просторных залов или студий.')">До 35 м²</button>
+            <button class="area-card" onclick="showResult('20', 'Рекомендуемая мощность: 07 (до 2.0 кВт / 7000 BTU). Оптимально для кухонь и небольших спален.')">До 20 м²</button>
+            <button class="area-card" onclick="showResult('25', 'Рекомендуемая мощность: 09 (до 2.5 кВт / 9000 BTU). Самый востребованный вариант для стандартных комнат.')">До 25 м²</button>
+            <button class="area-card" onclick="showResult('35', 'Рекомендуемая мощность: 12 (до 3.5 кВт / 12000 BTU). Отлично подходит для больших гостиных и студий.')">До 35 м²</button>
         </div>
         <div id="result" class="result-box"></div>
     </section>
 
+    <!-- Блок преимуществ -->
+    <section class="advantages">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="adv-grid">
+            <div class="adv-item">
+                <h4>Чистый монтаж</h4>
+                <p>Используем профессиональный инструмент со сбором пыли. Оставляем после себя идеальный порядок.</p>
+            </div>
+            <div class="adv-item">
+                <h4>Гарантия качества</h4>
+                <p>Официальный договор на монтажные работы и технику. Честная гарантия на узлы и соединения.</p>
+            </div>
+            <div class="adv-item">
+                <h4>Опыт более 10 лет</h4>
+                <p>Решаем задачи любой сложности: от стандартной установки в квартире до сложных мульти-систем на стадии ремонта.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Каталог товаров по площади -->
+    <section class="catalog">
+        <h2 class="section-title">Надежные решения для дома</h2>
+        <div class="catalog-grid">
+            
+            <!-- Карточка 1 -->
+            <div class="product-card">
+                <div>
+                    <span class="tag-area">Площадь до 20 м²</span>
+                    <h3 class="product-title">Сплит-система Настенная 07</h3>
+                    <ul class="product-features">
+                        <li>Энергоэффективность класса А</li>
+                        <li>Низкий уровень шума (от 22 дБ)</li>
+                        <li>Режимы: охлаждение / обогрев</li>
+<li>Тройная фильтрация воздуха</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="price-box">
+                        <span class="price-label">Цена с установкой:</span>
+                        <span class="price-value">от 28 000 ₽</span>
+                    </div>
+                    <a href="https://wa.me/79872756731?text=Интересует%20кондиционер%20на%2020%20кв.м" class="btn btn-order" target="_blank">Заказать под ключ</a>
+                </div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="product-card">
+                <div>
+                    <span class="tag-area">Площадь до 25 м²</span>
+                    <h3 class="product-title">Сплит-система Настенная 09</h3>
+                    <ul class="product-features">
+                        <li>Компрессор повышенной надежности</li>
+                        <li>Быстрое охлаждение Turbo</li>
+                        <li>Ночной режим сна (Sleep)</li>
+                        <li>Скрытый LED-дисплей</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="price-box">
+                        <span class="price-label">Цена с установкой:</span>
+                        <span class="price-value">от 32 000 ₽</span>
+                    </div>
+                    <a href="https://wa.me/79872756731?text=Интересует%20кондиционер%20на%2025%20кв.м" class="btn btn-order" target="_blank">Заказать под ключ</a>
+                </div>
+            </div>
+
+            <!-- Карточка 3 -->
+            <div class="product-card">
+                <div>
+                    <span class="tag-area">Площадь до 35 м²</span>
+                    <h3 class="product-title">Сплит-система Настенная 12</h3>
+                    <ul class="product-features">
+                        <li>Высокая производительность</li>
+                        <li>Авторестарт при сбоях сети</li>
+                        <li>Увеличенная длина трассы</li>
+                        <li>Антикоррозийное покрытие</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="price-box">
+                        <span class="price-label">Цена с установкой:</span>
+                        <span class="price-value">от 38 000 ₽</span>
+                    </div>
+                    <a href="https://wa.me/79872756731?text=Интересует%20кондиционер%20на%2035%20кв.м" class="btn btn-order" target="_blank">Заказать под ключ</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2026 Holod Master — Профессиональный климат в Казани. Все права защищены.</p>
+    </footer>
+
     <script>
         function showResult(area, text) {
-            // Убираем активный класс у всех кнопок
             document.querySelectorAll('.area-card').forEach(btn => btn.classList.remove('active'));
-            
-            // Добавляем активный класс нажатой кнопке
             event.target.classList.add('active');
             
-            // Показываем результат подбора
             const resultBox = document.getElementById('result');
             resultBox.innerHTML = '<strong>Для площади ' + area + ' м²:</strong><br>' + text;
             resultBox.style.display = 'block';
