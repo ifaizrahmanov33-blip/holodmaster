@@ -1,387 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Climat Master — Продажа и монтаж кондиционеров в Казани</title>
-    <style>
-        :root {
-            --primary-blue: #0A192F;
-            --accent-gold: #D4AF37;
-            --light-bg: #F8F9FA;
-            --text-dark: #333333;
-            --card-border: #E2E8F0;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* Шапка сайта */
-        header {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .logo span {
-            color: var(--accent-gold);
-        }
-
-        .header-contacts a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-        }
-
-        /* Главный экран (Hero-блок) с новым логотипом Climat Master на фоне */
-        .hero {
-            position: relative;
-            background-image: url('logo.jpg'); 
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-            color: white;
-            padding: 90px 20px 70px 20px;
-            text-align: center;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(10, 25, 47, 0.85); /* Плотный фильтр для читаемости текста */
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 34px;
-            margin-bottom: 15px;
-            line-height: 1.2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #E2E8F0;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-        }
-
-        /* Кнопки связи */
-        .cta-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 320px;
-            margin: 0 auto;
-        }
-
-        .btn {
-            display: block;
-            padding: 14px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            text-align: center;
-            transition: transform 0.2s, background-color 0.2s;
-            cursor: pointer;
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-telegram {
-            background-color: #0088cc;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0, 136, 204, 0.3);
-        }
-
-        .btn-telegram:hover {
-            background-color: #0077b3;
-        }
-
-        .btn-phone {
-            background-color: transparent;
-            color: var(--accent-gold);
-            border: 2px solid var(--accent-gold);
-            backdrop-filter: blur(4px);
-        }
-
-        .btn-phone:hover {
-            background-color: rgba(212, 175, 55, 0.15);
-        }
-/* Блок быстрого подбора по площади */
-        .quick-filter {
-            background: white;
-            border-radius: 12px;
-            padding: 25px 20px;
-            margin: -30px auto 40px auto;
-            max-width: 600px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 10;
-            width: 90%;
-            text-align: center;
-        }
-
-        .quick-filter h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: var(--primary-blue);
-        }
-
-        .area-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .area-card {
-            border: 2px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 12px 5px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
-            background: white;
-            color: var(--text-dark);
-        }
-
-        .area-card:hover, .area-card.active {
-            border-color: var(--primary-blue);
-            background-color: rgba(10, 25, 47, 0.05);
-            color: var(--primary-blue);
-        }
-
-        .result-box {
-            margin-top: 15px;
-            padding: 12px;
-            background-color: #F0F4F8;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            display: none;
-            border-left: 4px solid var(--accent-gold);
-            text-align: left;
-        }
-
-        /* Секция преимуществ */
-        .advantages {
-            padding: 40px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 24px;
-            color: var(--primary-blue);
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .adv-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .adv-item {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border-top: 3px solid var(--primary-blue);
-        }
-
-        .adv-item h4 {
-            color: var(--primary-blue);
-            font-size: 18px;
-            margin-bottom: 8px;
-        }
-
-        /* Каталог оборудования */
-        .catalog {
-            padding: 40px 20px 60px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-
-        .product-card {
-            background: white;
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: transform 0.2s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.05);
-        }
-
-        .tag-area {
-            display: inline-block;
-            background: #EBF8FF;
-            color: #2B6CB0;
-            font-weight: bold;
-            font-size: 12px;
-            padding: 4px 10px;
-            border-radius: 50px;
-            margin-bottom: 12px;
-            align-self: flex-start;
-        }
-
-        .product-title {
-            font-size: 20px;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 20px;
-            font-size: 14px;
-            color: #4A5568;
-        }
-
-        .product-features li {
-            margin-bottom: 6px;
-            position: relative;
-            padding-left: 18px;
-        }
-.product-features li::before {
-            content: "✓";
-            color: #0088cc;
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-
-        .price-box {
-            border-top: 1px solid #EDF2F7;
-            padding-top: 15px;
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price-label {
-            font-size: 14px;
-            color: #718096;
-        }
-
-        .price-value {
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--primary-blue);
-        }
-
-        .btn-order {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 10px 15px;
-            font-size: 14px;
-            border-radius: 6px;
-            margin-top: 15px;
-            text-decoration: none;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        /* Подвал */
-        footer {
-            background-color: var(--primary-blue);
-            color: #8892B0;
-            text-align: center;
-            padding: 30px 20px;
-            font-size: 14px;
-            border-top: 3px solid var(--accent-gold);
-        }
-
-        /* Адаптивность под ПК */
-        @media (min-width: 768px) {
-            .hero { padding: 140px 20px 110px 20px; }
-            .hero h1 { font-size: 46px; }
-            .cta-buttons { flex-direction: row; max-width: 500px; justify-content: center; }
-            .btn { width: 220px; }
-            .adv-grid { grid-template-columns: repeat(3, 1fr); }
-            .catalog-grid { grid-template-columns: repeat(3, 1fr); }
-            .section-title { font-size: 32px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Шапка сайта -->
-    <header>
-        <div class="logo">CLIMAT <span>MASTER</span></div>
-        <div class="header-contacts">
-            <a href="tel:+79872756731">+7 (987) 275-67-31</a>
-        </div>
-    </header>
-
-    <!-- Главный баннер с фоном -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Продажа и монтаж кондиционеров в Казани</h1>
-            <p>Профессиональный подбор климатического оборудования под ключ. Чистый монтаж без пыли за 1 день с гарантией на работу.</p>
-            
-            <div class="cta-buttons">
-                <a href="https://t.me/emil_holodmaster" class="btn btn-telegram" target="_blank">Написать в Telegram</a>
-                <a href="tel:+79872756731" class="btn btn-phone">Позвонить инженеру</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Интерактивный подбор по площади -->
+<!-- Интерактивный подбор по площади -->
     <section class="quick-filter">
         <h3>Быстрый подбор оборудования по площади:</h3>
         <div class="area-grid">
@@ -401,7 +18,7 @@
                 <p>Используем профессиональный инструмент со сбором пыли. Оставляем после себя идеальный порядок.</p>
             </div>
             <div class="adv-item">
-<h4>Гарантия качества</h4>
+                <h4>Гарантия качества</h4>
                 <p>Официальный договор на монтажные работы и технику. Честная гарантия на узлы и соединения.</p>
             </div>
             <div class="adv-item">
@@ -457,8 +74,7 @@
                     <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
                 </div>
             </div>
-
-            <!-- Карточка 3 -->
+<!-- Карточка 3 -->
             <div class="product-card">
                 <div>
                     <span class="tag-area">Площадь до 35 м²</span>
@@ -489,7 +105,560 @@
 
     <script>
         function showResult(area, text) {
-document.querySelectorAll('.area-card').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.area-card').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const resultBox = document.getElementById('result');
+            resultBox.innerHTML = '<strong>Для площади ' + area + ' м²:</strong><br>' + text;
+            resultBox.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climat Master — Продажа и монтаж кондиционеров в Казани</title>
+    <style>
+        :root {
+            --primary-blue: #0B1523;
+            --card-dark: #132237;
+            --accent-gold: #D4AF37;
+            --light-bg: #F4F7FA;
+            --text-dark: #1E293B;
+            --card-border: #E2E8F0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Шапка сайта */
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 18px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .logo span {
+            color: var(--accent-gold);
+        }
+
+        .header-contacts a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+
+        .header-contacts a:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* Премиальный главный экран (Hero-блок) */
+        .hero {
+            background: radial-gradient(circle at 80% 50%, #1E3A5F 0%, #0B1523 100%);
+            color: white;
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #94A3B8;
+            max-width: 550px;
+            margin: 0 auto 35px auto;
+        }
+
+        /* Вывод премиального логотипа сбоку */
+        .hero-image-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-logo-img {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 0 35px rgba(0, 136, 204, 0.4), 0 0 15px rgba(212, 175, 55, 0.2);
+            border: 3px solid rgba(212, 175, 55, 0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-logo-img:hover {
+            transform: scale(1.03) rotate(2deg);
+        }
+
+        /* Кнопки связи */
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: block;
+            padding: 16px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+.btn-telegram {
+            background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
+        }
+
+        .btn-telegram:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
+        }
+
+        .btn-phone {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 2px solid var(--accent-gold);
+        }
+
+        .btn-phone:hover {
+            background-color: rgba(212, 175, 55, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Блок быстрого подбора по площади */
+        .quick-filter {
+            background: white;
+            border-radius: 16px;
+            padding: 30px 24px;
+            margin: -25px auto 50px auto;
+            max-width: 650px;
+            box-shadow: 0 15px 35px rgba(11, 21, 35, 0.1);
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .quick-filter h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .area-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .area-card {
+            border: 1px solid #CBD5E1;
+            border-radius: 10px;
+            padding: 14px 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            background: white;
+            color: #475569;
+        }
+
+        .area-card:hover, .area-card.active {
+            border-color: #0088cc;
+            background-color: rgba(0, 136, 204, 0.05);
+            color: #0088cc;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: #F8FAFC;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+            border-left: 4px solid var(--accent-gold);
+            text-align: left;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        /* Секция преимуществ */
+        .advantages {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 35px;
+        }
+
+        .adv-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .adv-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            border-top: 4px solid var(--primary-blue);
+            transition: transform 0.3s;
+        }
+
+        .adv-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .adv-item h4 {
+            color: var(--primary-blue);
+            font-size: 19px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        /* Каталог оборудования */
+        .catalog {
+            padding: 40px 20px 70px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.06);
+        }
+.tag-area {
+            display: inline-block;
+            background: #E0F2FE;
+            color: #0369A1;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+            align-self: flex-start;
+        }
+
+        .product-title {
+            font-size: 21px;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: #475569;
+        }
+
+        .product-features li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 22px;
+        }
+
+        .product-features li::before {
+            content: "✓";
+            color: #0088cc;
+            position: absolute;
+            left: 0;
+            font-weight: 800;
+        }
+
+        .price-box {
+            border-top: 1px solid #F1F5F9;
+            padding-top: 18px;
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: #64748B;
+        }
+
+        .price-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .btn-order {
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 20px;
+            font-size: 15px;
+            border-radius: 8px;
+            margin-top: 18px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+
+        .btn-order:hover {
+            background: #13253F;
+        }
+
+        /* Подвал */
+        footer {
+            background-color: var(--primary-blue);
+            color: #64748B;
+            text-align: center;
+            padding: 35px 20px;
+            font-size: 14px;
+            border-top: 2px solid var(--accent-gold);
+        }
+
+        /* Адаптивность под ПК */
+        @media (min-width: 768px) {
+            .hero { padding: 80px 20px; }
+            .hero-container { flex-direction: row; justify-content: space-between; gap: 20px; }
+            .hero-content { text-align: left; }
+            .hero h1 { font-size: 44px; }
+            .hero p { margin: 0 0 35px 0; font-size: 18px; }
+            .hero-logo-img { max-width: 360px; }
+            .cta-buttons { flex-direction: row; max-width: none; justify-content: flex-start; }
+            .btn { width: 230px; }
+            .adv-grid { grid-template-columns: repeat(3, 1fr); }
+            .catalog-grid { grid-template-columns: repeat(3, 1fr); }
+            .section-title { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка сайта -->
+    <header>
+        <div class="logo">CLIMAT <span>MASTER</span></div>
+        <div class="header-contacts">
+            <a href="tel:+79872756731">+7 (987) 275-67-31</a>
+        </div>
+    </header>
+
+    <!-- Премиальный главный баннер -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Продажа и монтаж кондиционеров в Казани</h1>
+                <p>Профессиональный подбор климатического оборудования под ключ. Чистый монтаж без пыли за 1 день с гарантией на работу.</p>
+                
+                <div class="cta-buttons">
+                    <a href="https://t.me/emil_holodmaster" class="btn btn-telegram" target="_blank">Написать в Telegram</a>
+                    <a href="tel:+79872756731" class="btn btn-phone">Позвонить инженеру</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <!-- Сюда выводится ваш круглый сочный логотип -->
+                <img src="logo.jpg" alt="Climat Master" class="hero-logo-img">
+            </div>
+        </div>
+    </section>
+<!-- Интерактивный подбор по площади -->
+    <section class="quick-filter">
+        <h3>Быстрый подбор оборудования по площади:</h3>
+        <div class="area-grid">
+            <button class="area-card" onclick="showResult('20', 'Рекомендуемая мощность: 07 (до 2.0 кВт / 7000 BTU). Оптимально для кухонь и небольших спален.')">До 20 м²</button>
+            <button class="area-card" onclick="showResult('25', 'Рекомендуемая мощность: 09 (до 2.5 кВт / 9000 BTU). Самый востребованный вариант для стандартных комнат.')">До 25 м²</button>
+            <button class="area-card" onclick="showResult('35', 'Рекомендуемая мощность: 12 (до 3.5 кВт / 12000 BTU). Отлично подходит для больших гостиных и студий.')">До 35 м²</button>
+        </div>
+        <div id="result" class="result-box"></div>
+    </section>
+
+    <!-- Блок преимуществ -->
+    <section class="advantages">
+        <h2 class="section-title">Почему выбирают нас</h2>
+        <div class="adv-grid">
+            <div class="adv-item">
+                <h4>Чистый монтаж</h4>
+                <p>Используем профессиональный инструмент со сбором пыли. Оставляем после себя идеальный порядок.</p>
+            </div>
+            <div class="adv-item">
+                <h4>Гарантия качества</h4>
+                <p>Официальный договор на монтажные работы и технику. Честная гарантия на узлы и соединения.</p>
+            </div>
+            <div class="adv-item">
+                <h4>Опыт более 10 лет</h4>
+                <p>Решаем задачи любой сложности: от стандартной установки в квартире до сложных мульти-систем на стадии ремонта.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Каталог товаров по площади -->
+    <section class="catalog">
+        <h2 class="section-title">Надежные решения для дома</h2>
+        <div class="catalog-grid">
+            
+            <!-- Карточка 1 -->
+            <div class="product-card">
+                <div>
+                    <span class="tag-area">Площадь до 20 м²</span>
+                    <h3 class="product-title">Сплит-система Настенная 07</h3>
+                    <ul class="product-features">
+                        <li>Энергоэффективность класса А</li>
+                        <li>Низкий уровень шума (от 22 дБ)</li>
+                        <li>Режимы: охлаждение / обогрев</li>
+                        <li>Тройная фильтрация воздуха</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="price-box">
+                        <span class="price-label">Цена с установкой:</span>
+                        <span class="price-value">от 28 000 ₽</span>
+                    </div>
+                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
+                </div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="product-card">
+                <div>
+                    <span class="tag-area">Площадь до 25 м²</span>
+                    <h3 class="product-title">Сплит-система Настенная 09</h3>
+                    <ul class="product-features">
+                        <li>Компрессор повышенной надежности</li>
+                        <li>Быстрое охлаждение Turbo</li>
+                        <li>Ночной режим сна (Sleep)</li>
+                        <li>Скрытый LED-дисплей</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="price-box">
+                        <span class="price-label">Цена с установкой:</span>
+                        <span class="price-value">от 32 000 ₽</span>
+                    </div>
+                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
+                </div>
+            </div>
+<!-- Карточка 3 -->
+            <div class="product-card">
+                <div>
+                    <span class="tag-area">Площадь до 35 м²</span>
+                    <h3 class="product-title">Сплит-система Настенная 12</h3>
+                    <ul class="product-features">
+                        <li>Высокая производительность</li>
+                        <li>Авторестарт при сбоях сети</li>
+                        <li>Увеличенная длина трассы</li>
+                        <li>Антикоррозийное покрытие</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="price-box">
+                        <span class="price-label">Цена с установкой:</span>
+                        <span class="price-value">от 38 000 ₽</span>
+                    </div>
+                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2026 Climat Master — Профессиональный климат в Казани. Все права защищены.</p>
+    </footer>
+
+    <script>
+        function showResult(area, text) {
+            document.querySelectorAll('.area-card').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
             const resultBox = document.getElementById('result');
