@@ -1,593 +1,552 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Climat Master — Продажа и монтаж кондиционеров в Казани</title>
-    <style>
-        :root {
-            --primary-blue: #0B1523;
-            --card-dark: #132237;
-            --accent-gold: #D4AF37;
-            --light-bg: #F4F7FA;
-            --text-dark: #1E293B;
-            --card-border: #E2E8F0;
-        }
+<!-- СТИЛИ ДЛЯ КАТАЛОГА (Вставь этот блок в <head> или перед блоком каталога) -->
+<style>
+    :root {
+        --primary-color: #0056b3;
+        --secondary-color: #ffc107;
+        --dark-bg: #111;
+        --card-bg: #ffffff;
+        --text-dark: #333;
+        --badge-budget: #28a745;
+        --badge-comfort: #17a2b8;
+        --badge-premium: #6f42c1;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
-        }
+    .catalog-section {
+        padding: 60px 20px;
+        background-color: #f8f9fa;
+        font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        color: var(--text-dark);
+    }
 
-        body {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
+    .catalog-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
-        /* Шапка сайта */
-        header {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
+    .catalog-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #111;
+        font-weight: 700;
+    }
 
-        .brand-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .catalog-subtitle {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #666;
+        margin-bottom: 40px;
+    }
 
-        .header-logo-mini {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 1px solid var(--accent-gold);
-            object-fit: cover;
-        }
+    /* Навигация/Фильтры по площади */
+    .filter-tabs {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 40px;
+    }
 
-        .logo {
-            font-size: 20px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-        }
+    .filter-btn {
+        background-color: #fff;
+        border: 2px solid #dee2e6;
+        padding: 12px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
 
-        .logo span {
-            color: var(--accent-gold);
-        }
+    .filter-btn:hover, .filter-btn.active {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(0,86,179,0.3);
+    }
 
-        .header-contacts a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 14px;
-            border-radius: 6px;
-            transition: all 0.3s;
-        }
+    /* Сетка товаров */
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+    }
 
-        .header-contacts a:hover {
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-        }
+    .product-card {
+        background: var(--card-bg);
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #eef2f5;
+    }
 
-        /* Премиальный главный экран (Hero-блок) */
-        .hero {
-            background: radial-gradient(circle at 80% 50%, #1E3A5F 0%, #0B1523 100%);
-            color: white;
-            padding: 60px 20px;
-            position: relative;
-            overflow: hidden;
-        }
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
 
-        .hero-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column-reverse;
-            align-items: center;
-            gap: 40px;
-        }
+    .product-image-block {
+        position: relative;
+        background: #f1f5f9;
+        padding: 30px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 180px;
+    }
 
-        .hero-content {
-            flex: 1;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
+    .product-image-placeholder {
+        font-size: 4rem;
+        color: #cbd5e1;
+    }
 
-        .hero h1 {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.25;
-            letter-spacing: -0.5px;
-        }
+    .segment-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        color: #fff;
+        padding: 5px 12px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        border-radius: 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
 
-        .hero p {
-            font-size: 16px;
-            color: #94A3B8;
-            max-width: 550px;
-            margin: 0 auto 35px auto;
-        }
+    .badge-budget { background-color: var(--badge-budget); }
+    .badge-comfort { background-color: var(--badge-comfort); }
+    .badge-premium { background-color: var(--badge-premium); }
 
-        /* Интеграция нового логотипа 1000411534_2.png */
-        .hero-image-wrapper {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            z-index: 2;
-        }
+    .compressor-type {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0,0,0,0.6);
+        color: #fff;
+        padding: 5px 10px;
+        font-size: 0.75rem;
+        border-radius: 6px;
+        font-weight: 600;
+    }
 
-        .hero-logo-img {
-            max-width: 290px;
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            box-shadow: 0 0 40px rgba(0, 136, 204, 0.5), 0 0 20px rgba(212, 175, 55, 0.3);
-            border: 3px solid rgba(212, 175, 55, 0.4);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
+    .product-info {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
 
-        .hero-logo-img:hover {
-            transform: scale(1.04) rotate(1deg);
-            box-shadow: 0 0 50px rgba(0, 136, 204, 0.7), 0 0 25px rgba(212, 175, 55, 0.5);
-        }
-/* Кнопки связи */
-        .cta-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 320px;
-            margin: 0 auto;
-        }
+    .product-brand {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        color: #888;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+    }
 
-        .btn {
-            display: block;
-            padding: 16px 24px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 16px;
-            text-align: center;
-            transition: all 0.25s ease;
-            cursor: pointer;
-        }
+    .product-name {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #111;
+    }
 
-        .btn-telegram {
-            background: linear-gradient(135deg, #0088cc 0%, #006699 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
-        }
+    .product-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 20px 0;
+        font-size: 0.9rem;
+        color: #555;
+    }
 
-        .btn-telegram:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
-        }
+    .product-features li {
+        margin-bottom: 6px;
+        position: relative;
+        padding-left: 20px;
+    }
 
-        .btn-phone {
-            background-color: transparent;
-            color: var(--accent-gold);
-            border: 2px solid var(--accent-gold);
-        }
+    .product-features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: var(--badge-budget);
+        font-weight: bold;
+    }
 
-        .btn-phone:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
-        }
+    /* Цены */
+    .price-block {
+        background: #f8fafc;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: auto;
+        margin-bottom: 20px;
+    }
 
-        /* Блок быстрого подбора по площади */
-        .quick-filter {
-            background: white;
-            border-radius: 16px;
-            padding: 30px 24px;
-            margin: -25px auto 50px auto;
-            max-width: 650px;
-            box-shadow: 0 15px 35px rgba(11, 21, 35, 0.1);
-            position: relative;
-            z-index: 10;
-            width: 90%;
-            text-align: center;
-            border: 1px solid rgba(0,0,0,0.03);
-        }
+    .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
 
-        .quick-filter h3 {
-            font-size: 18px;
-            margin-bottom: 20px;
-            color: var(--primary-blue);
-            font-weight: 700;
-        }
+    .price-row:last-child {
+        margin-bottom: 0;
+        padding-top: 8px;
+        border-top: 1px dashed #cbd5e1;
+    }
 
-        .area-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
+    .price-label {
+        font-size: 0.85rem;
+        color: #666;
+    }
 
-        .area-card {
-            border: 1px solid #CBD5E1;
-            border-radius: 10px;
-            padding: 14px 5px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            background: white;
-            color: #475569;
-        }
+    .price-value {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #111;
+    }
 
-        .area-card:hover, .area-card.active {
-            border-color: #0088cc;
-            background-color: rgba(0, 136, 204, 0.05);
-            color: #0088cc;
-        }
+    .price-value.combo {
+        color: var(--primary-color);
+        font-size: 1.25rem;
+    }
 
-        .result-box {
-            margin-top: 20px;
-            padding: 16px;
-            background-color: #F8FAFC;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            display: none;
-            border-left: 4px solid var(--accent-gold);
-            text-align: left;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-        }
+    /* Кнопка заказа */
+    .order-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        background-color: #24A1DE; /* Цвет Telegram */
+        color: #fff;
+        text-decoration: none;
+        padding: 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        text-align: center;
+        transition: background 0.3s ease;
+    }
 
-        /* Секция преимуществ */
-        .advantages {
-            padding: 40px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+    .order-btn:hover {
+        background-color: #1d82b5;
+    }
 
-        .section-title {
-            text-align: center;
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--primary-blue);
-            margin-bottom: 35px;
-        }
+    /* Скрытие неподходящих карточек по фильтру */
+    .product-card.hidden {
+        display: none;
+    }
 
-        .adv-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
+    @media(max-width: 768px) {
+        .catalog-title { font-size: 2rem; }
+        .filter-btn { padding: 10px 18px; font-size: 0.9rem; }
+    }
+</style>
 
-        .adv-item {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            border-top: 4px solid var(--primary-blue);
-            transition: transform 0.3s;
-        }
+<!-- СЕКЦИЯ КАТАЛОГА -->
+<section class="catalog-section" id="catalog">
+    <div class="catalog-container">
+        <h2 class="catalog-title">Каталог сплит-систем</h2>
+        <p class="catalog-subtitle">Цены действительны для подписчиков. В стоимость «Под ключ» уже включен профессиональный чистый монтаж!</p>
 
-        .adv-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .adv-item h4 {
-            color: var(--primary-blue);
-            font-size: 19px;
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        /* Каталог оборудования */
-        .catalog {
-            padding: 40px 20px 70px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-.catalog-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-
-        .product-card {
-            background: white;
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
-        }
-
-        .product-card.highlight {
-            border-color: #0088cc;
-            box-shadow: 0 0 20px rgba(0, 136, 204, 0.2);
-            transform: scale(1.02);
-        }
-
-        .tag-area {
-            display: inline-block;
-            background: #E0F2FE;
-            color: #0369A1;
-            font-weight: 700;
-            font-size: 12px;
-            padding: 6px 14px;
-            border-radius: 50px;
-            margin-bottom: 15px;
-            align-self: flex-start;
-        }
-
-        .product-title {
-            font-size: 21px;
-            color: var(--primary-blue);
-            margin-bottom: 12px;
-            font-weight: 700;
-        }
-
-        .product-features {
-            list-style: none;
-            margin-bottom: 25px;
-            font-size: 14px;
-            color: #475569;
-        }
-
-        .product-features li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 22px;
-        }
-
-        .product-features li::before {
-            content: "✓";
-            color: #0088cc;
-            position: absolute;
-            left: 0;
-            font-weight: 800;
-        }
-
-        .price-box {
-            border-top: 1px solid #F1F5F9;
-            padding-top: 18px;
-            margin-top: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price-label {
-            font-size: 14px;
-            color: #64748B;
-        }
-
-        .price-value {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-blue);
-        }
-
-        .btn-order {
-            background: var(--primary-blue);
-            color: white;
-            padding: 12px 20px;
-            font-size: 15px;
-            border-radius: 8px;
-            margin-top: 18px;
-            text-decoration: none;
-            text-align: center;
-            font-weight: 700;
-            transition: background 0.2s;
-        }
-
-        .btn-order:hover {
-            background: #13253F;
-        }
-
-        /* Подвал */
-        footer {
-            background-color: var(--primary-blue);
-            color: #64748B;
-            text-align: center;
-            padding: 35px 20px;
-            font-size: 14px;
-            border-top: 2px solid var(--accent-gold);
-        }
-
-        /* Адаптивность под ПК */
-        @media (min-width: 768px) {
-            .hero { padding: 80px 20px; }
-            .hero-container { flex-direction: row; justify-content: space-between; gap: 20px; }
-            .hero-content { text-align: left; }
-            .hero h1 { font-size: 44px; }
-            .hero p { margin: 0 0 35px 0; font-size: 18px; }
-            .hero-logo-img { max-width: 360px; }
-            .logo { font-size: 24px; }
-            .header-contacts a { font-size: 16px; }
-            .cta-buttons { flex-direction: row; max-width: none; justify-content: flex-start; }
-            .btn { width: 230px; }
-            .adv-grid { grid-template-columns: repeat(3, 1fr); }
-            .catalog-grid { grid-template-columns: repeat(3, 1fr); }
-            .section-title { font-size: 32px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Шапка сайта -->
-    <header>
-        <div class="brand-wrapper">
-            <img src="logo.png" alt="Climat Master" class="header-logo-mini">
-            <div class="logo">CLIMAT <span>MASTER</span></div>
+        <!-- Вкладки переключения площади -->
+        <div class="filter-tabs">
+            <button class="filter-btn active" onclick="filterCatalog('all')">Все модели</button>
+            <button class="filter-btn" onclick="filterCatalog('07')">До 20 м² (07)</button>
+            <button class="filter-btn" onclick="filterCatalog('09')">До 25 м² (09)</button>
+            <button class="filter-btn" onclick="filterCatalog('12')">До 35 м² (12)</button>
         </div>
-        <div class="header-contacts">
-            <a href="tel:+79872756731">+7 (987) 275-67-31</a>
-        </div>
-    </header>
-<!-- Премиальный главный баннер -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Продажа и монтаж кондиционеров в Казани</h1>
-                <p>Профессиональный подбор климатического оборудования под ключ. Чистый монтаж без пыли за 1 день с гарантией на работу.</p>
-                
-                <div class="cta-buttons">
-                    <a href="https://t.me/emil_holodmaster" class="btn btn-telegram" target="_blank">Написать в Telegram</a>
-                    <a href="tel:+79872756731" class="btn btn-phone">Позвонить инженеру</a>
+
+        <!-- Сетка товаров -->
+        <div class="products-grid" id="catalog-grid">
+
+            <!-- КАРТОЧКА 1: MBO M-1 (07) -->
+            <div class="product-card" data-capacity="07">
+                <div class="product-image-block">
+                    <span class="segment-badge badge-budget">Бюджет</span>
+                    <span class="compressor-type">On/Off</span>
+                    <!-- Вместо этой иконки можно вставить реальное изображение: <img src="путь_к_фото.jpg" alt="MBO"> -->
+                    <div class="product-image-placeholder">❄️</div>
                 </div>
-            </div>
-            <div class="hero-image-wrapper">
-                <!-- Новый премиальный круглый логотип -->
-                <img src="logo.png" alt="Climat Master" class="hero-logo-img">
-            </div>
-        </div>
-    </section>
-
-    <!-- Интерактивный подбор по площади -->
-    <section class="quick-filter">
-        <h3>Быстрый подбор оборудования по площади:</h3>
-        <div class="area-grid">
-            <button class="area-card" onclick="selectProduct(0, '20', 'Рекомендуемая мощность: 07 (до 2.0 кВт / 7000 BTU). Оптимально для кухонь и небольших спален.')">До 20 м²</button>
-            <button class="area-card" onclick="selectProduct(1, '25', 'Рекомендуемая мощность: 09 (до 2.5 кВт / 9000 BTU). Самый востребованный вариант для стандартных комнат.')">До 25 м²</button>
-            <button class="area-card" onclick="selectProduct(2, '35', 'Рекомендуемая мощность: 12 (до 3.5 кВт / 12000 BTU). Отлично подходит для больших гостиных и студий.')">До 35 м²</button>
-        </div>
-        <div id="result" class="result-box"></div>
-    </section>
-
-    <!-- Блок преимуществ -->
-    <section class="advantages">
-        <h2 class="section-title">Почему выбирают нас</h2>
-        <div class="adv-grid">
-            <div class="adv-item">
-                <h4>Чистый монтаж</h4>
-                <p>Используем профессиональный инструмент со сбором пыли. Оставляем после себя идеальный порядок.</p>
-            </div>
-            <div class="adv-item">
-                <h4>Гарантия качества</h4>
-                <p>Официальный договор на монтажные работы и технику. Честная гарантия на узлы и соединения.</p>
-            </div>
-            <div class="adv-item">
-                <h4>Опыт более 10 лет</h4>
-                <p>Решаем задачи любой сложности: от стандартной установки в квартире до сложных мульти-систем на стадии ремонта.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Каталог товаров по площади -->
-    <section id="catalog-section" class="catalog">
-        <h2 class="section-title">Надежные решения для дома</h2>
-        <div class="catalog-grid">
-            
-            <!-- Карточка 1 -->
-            <div class="product-card">
-                <div>
-                    <span class="tag-area">Площадь до 20 м²</span>
-                    <h3 class="product-title">Сплит-система Настенная 07</h3>
+                <div class="product-info">
+                    <div class="product-brand">MBO</div>
+                    <div class="product-name">Серия M-1 (07)</div>
                     <ul class="product-features">
-                        <li>Энергоэффективность класса А</li>
-                        <li>Низкий уровень шума (от 22 дБ)</li>
-                        <li>Режимы: охлаждение / обогрев</li>
-                        <li>Тройная фильтрация воздуха</li>
+                        <li>Надежный японский компрессор GMCC (Toshiba) / Highly (Hitachi)</li>
+                        <li>Умное воздухораспределение (без сквозняков)</li>
+                        <li>Антикоррозийное покрытие Golden Fin</li>
+                        <li>Супер-тихий режим «Сон»</li>
                     </ul>
-                </div>
-                <div>
-                    <div class="price-box">
-                        <span class="price-label">Цена с установкой:</span>
-                        <span class="price-value">от 28 000 ₽</span>
+                    <div class="price-block">
+                        <div class="price-row">
+                            <span class="price-label">Оборудование:</span>
+                            <span class="price-value">19 900 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Под ключ с монтажом:</span>
+                            <span class="price-value combo">34 900 ₽</span>
+                        </div>
                     </div>
-                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
+                    <a href="https://t.me/emil_holodmaster?text=Здравствуйте!%20Хочу%20заказать%20кондиционер%20MBO%20серии%20M-1%20(07%20-%20до%2020%20м²)%20под%20ключ." target="_blank" class="order-btn">
+                        <span>Заказать через Telegram</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- Карточка 2 -->
-            <div class="product-card">
-<div>
-                    <span class="tag-area">Площадь до 25 м²</span>
-                    <h3 class="product-title">Сплит-система Настенная 09</h3>
-                    <ul class="product-features">
-                        <li>Компрессор повышенной надежности</li>
-                        <li>Быстрое охлаждение Turbo</li>
-                        <li>Ночной режим сна (Sleep)</li>
-                        <li>Скрытый LED-дисплей</li>
-                    </ul>
+            <!-- КАРТОЧКА 2: MBO M-1 (09) -->
+            <div class="product-card" data-capacity="09">
+                <div class="product-image-block">
+                    <span class="segment-badge badge-budget">Бюджет</span>
+                    <span class="compressor-type">On/Off</span>
+                    <div class="product-image-placeholder">❄️</div>
                 </div>
-                <div>
-                    <div class="price-box">
-                        <span class="price-label">Цена с установкой:</span>
-                        <span class="price-value">от 32 000 ₽</span>
+                <div class="product-info">
+                    <div class="product-brand">MBO</div>
+                    <div class="product-name">Серия M-1 (09)</div>
+                    <ul class="product-features">
+                        <li>Компрессор GMCC (Toshiba) / Highly (Hitachi)</li>
+                        <li>Площадь помещения до 25 кв.м.</li>
+                        <li>Золотое напыление теплообменника</li>
+                        <li>Идеальный выбор под сдачу или в офис</li>
+                    </ul>
+                    <div class="price-block">
+                        <div class="price-row">
+                            <span class="price-label">Оборудование:</span>
+                            <span class="price-value">20 900 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Под ключ с монтажом:</span>
+                            <span class="price-value combo">35 900 ₽</span>
+                        </div>
                     </div>
-                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
+                    <a href="https://t.me/emil_holodmaster?text=Здравствуйте!%20Хочу%20заказать%20кондиционер%20MBO%20серии%20M-1%20(09%20-%20до%2025%20м²)%20под%20ключ." target="_blank" class="order-btn">
+                        <span>Заказать через Telegram</span>
+                    </a>
                 </div>
             </div>
 
-            <!-- Карточка 3 -->
-            <div class="product-card">
-                <div>
-                    <span class="tag-area">Площадь до 35 м²</span>
-                    <h3 class="product-title">Сплит-система Настенная 12</h3>
-                    <ul class="product-features">
-                        <li>Высокая производительность</li>
-                        <li>Авторестарт при сбоях сети</li>
-                        <li>Увеличенная длина трассы</li>
-                        <li>Антикоррозийное покрытие</li>
-                    </ul>
+            <!-- КАРТОЧКА 3: Ballu Lagoon (07) -->
+            <div class="product-card" data-capacity="07">
+                <div class="product-image-block">
+                    <span class="segment-badge badge-comfort">Комфорт</span>
+                    <span class="compressor-type">On/Off</span>
+                    <div class="product-image-placeholder">❄️</div>
                 </div>
-                <div>
-                    <div class="price-box">
-                        <span class="price-label">Цена с установкой:</span>
-                        <span class="price-value">от 38 000 ₽</span>
+                <div class="product-info">
+                    <div class="product-brand">Ballu</div>
+                    <div class="product-name">Lagoon (07)</div>
+                    <ul class="product-features">
+                        <li>Премиальный матовый пластик (не бликует)</li>
+                        <li>Скрытый LED-дисплей (отключаемый)</li>
+                        <li>Двухкомпонентная фильтрация воздуха</li>
+                        <li>Память положения жалюзи</li>
+                    </ul>
+                    <div class="price-block">
+                        <div class="price-row">
+                            <span class="price-label">Оборудование:</span>
+                            <span class="price-value">23 490 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Под ключ с монтажом:</span>
+                            <span class="price-value combo">38 490 ₽</span>
+                        </div>
                     </div>
-                    <a href="https://t.me/emil_holodmaster" class="btn btn-order" target="_blank">Заказать через Telegram</a>
+                    <a href="https://t.me/emil_holodmaster?text=Здравствуйте!%20Хочу%20заказать%20кондиционер%20Ballu%20Lagoon%20(07%20-%20до%2020%20м²)%20под%20ключ." target="_blank" class="order-btn">
+                        <span>Заказать через Telegram</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 4: Hisense GOAL (07) -->
+            <div class="product-card" data-capacity="07">
+                <div class="product-image-block">
+                    <span class="segment-badge badge-comfort">Комфорт</span>
+                    <span class="compressor-type">On/Off</span>
+                    <div class="product-image-placeholder">❄️</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Hisense</div>
+                    <div class="product-name">GOAL Classic A (07)</div>
+                    <ul class="product-features">
+                        <li>Белоснежный качественный пластик и строгие линии</li>
+                        <li>5 скоростей вентилятора (работает максимально тихо)</li>
+                        <li>Управление потоком 3D Auto Air с пульта</li>
+                        <li>Комплексная система самоочистки замораживанием</li>
+                    </ul>
+                    <div class="price-block">
+                        <div class="price-row">
+                            <span class="price-label">Оборудование:</span>
+                            <span class="price-value">25 490 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Под ключ с монтажом:</span>
+                            <span class="price-value combo">40 490 ₽</span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/emil_holodmaster?text=Здравствуйте!%20Хочу%20заказать%20кондиционер%20Hisense%20GOAL%20(07%20-%20до%2020%20м²)%20под%20ключ." target="_blank" class="order-btn">
+                        <span>Заказать через Telegram</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 5: Energolux Baden 2 (07) -->
+            <div class="product-card" data-capacity="07">
+                <div class="product-image-block">
+                    <span class="segment-badge badge-premium">Премиум Европа</span>
+                    <span class="compressor-type">On/Off</span>
+                    <div class="product-image-placeholder">❄️</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Energolux</div>
+                    <div class="product-name">Baden 2 (07)</div>
+                    <ul class="product-features">
+                        <li>Швейцарская надежность и эталон тишины</li>
+                        <li>Датчик I Feel (поддерживает температуру рядом с вами)</li>
+                        <li>Многоступенчатая фильтрация (пыль, аллергены, запахи)</li>
+                        <li>4 года официальной гарантии!</li>
+                    </ul>
+                    <div class="price-block">
+                        <div class="price-row">
+                            <span class="price-label">Оборудование:</span>
+                            <span class="price-value">28 490 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Под ключ с монтажом:</span>
+                            <span class="price-value combo">43 490 ₽</span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/emil_holodmaster?text=Здравствуйте!%20Хочу%20заказать%20кондиционер%20Energolux%20Baden%202%20(07%20-%20до%2020%20м²)%20под%20ключ." target="_blank" class="order-btn">
+                        <span>Заказать через Telegram</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 6: Energolux Davos (07) INVERTER -->
+            <div class="product-card" data-capacity="07">
+                <div class="product-image-block">
+                    <span class="segment-badge badge-premium">Инвертор</span>
+                    <span class="compressor-type">Inverter</span>
+                    <div class="product-image-placeholder">❄️</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Energolux</div>
+                    <div class="product-name">Davos DC-Inverter (07)</div>
+                    <ul class="product-features">
+                        <li>Тихий и экономичный DC-Inverter нового поколения</li>
+                        <li>Встроенный Wi-Fi (управление со смартфона из любой точки)</li>
+                        <li>Ионизатор воздуха и объемный поток 4D Air Flow</li>
+                        <li>5 лет официальной гарантии на систему</li>
+                    </ul>
+                    <div class="price-block">
+                        <div class="price-row">
+                            <span class="price-label">Оборудование:</span>
+                            <span class="price-value">30 900 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Под ключ с монтажом:</span>
+                            <span class="price-value combo">45 900 ₽</span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/emil_holodmaster?text=Здравствуйте!%20Хочу%20заказать%20инверторный%20кондиционер%20Energolux%20Davos%20(07%20-%20до%2020%20м²)%20под%20ключ." target="_blank" class="order-btn">
+                        <span>Заказать через Telegram</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 7: Ballu Lagoon DC Inverter (09) -->
+            <div class="product-card" data-capacity="09">
+                <div class="product-image-block">
+                    <span class="segment-badge badge-comfort">Инвертор</span>
+                    <span class="compressor-type">Inverter</span>
+                    <div class="product-image-placeholder">❄️</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">Ballu</div>
+                    <div class="product-name">Lagoon DC (09)</div>
+                    <ul class="product-features">
+                        <li>Инверторный хит для площади до 25 кв.м.</li>
+                        <li>Энергоэффективный и безопасный эко-фреон R32</li>
+                        <li>Защита Golden Fin и встроенная ионизация воздуха</li>
+                        <li>Очень тихая плавная работа компрессора</li>
+                    </ul>
+                    <div class="price-block">
+                        <div class="price-row">
+                            <span class="price-label">Оборудование:</span>
+                            <span class="price-value">33 790 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Под ключ с монтажом:</span>
+                            <span class="price-value combo">48 790 ₽</span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/emil_holodmaster?text=Здравствуйте!%20Хочу%20заказать%20инверторный%20кондиционер%20Ballu%20Lagoon%20DC%20(09%20-%20до%252025%20м²)%20под%20ключ." target="_blank" class="order-btn">
+                        <span>Заказать через Telegram</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 8: MBO M-1 (12) — Мощный для больших комнат -->
+            <div class="product-card" data-capacity="12">
+                <div class="product-image-block">
+                    <span class="segment-badge badge-budget">Бюджет</span>
+                    <span class="compressor-type">On/Off</span>
+                    <div class="product-image-placeholder">❄️</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">MBO</div>
+                    <div class="product-name">Серия M-1 (12)</div>
+                    <ul class="product-features">
+                        <li>Высокая мощность для залов, студий и гостиных (до 35 м²)</li>
+                        <li>Проверенное заводское качество сборки</li>
+                        <li>Надежный компрессор от мировых гигантов индустрии</li>
+                        <li>Быстрое охлаждение больших пространств</li>
+                    </ul>
+                    <div class="price-block">
+                        <div class="price-row">
+                            <span class="price-label">Оборудование:</span>
+                            <span class="price-value">25 900 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Под ключ с монтажом:</span>
+                            <span class="price-value combo">40 900 ₽</span>
+                        </div>
+                    </div>
+                    <a href="https://t.me/emil_holodmaster?text=Здравствуйте!%20Хочу%20заказать%20кондиционер%20MBO%20серии%20M-1%20(12%20-%20до%2035%20м²)%20под%20ключ." target="_blank" class="order-btn">
+                        <span>Заказать через Telegram</span>
+                    </a>
                 </div>
             </div>
 
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Подвал -->
-    <footer>
-        <p>&copy; 2026 Climat Master — Профессиональный климат в Казани. Все права защищены.</p>
-    </footer>
+<!-- Скрипт переключения вкладок (Вставь перед закрывающим тегом </body>) -->
+<script>
+    function filterCatalog(capacity) {
+        // Меняем активный класс на кнопках
+        const buttons = document.querySelectorAll('.filter-btn');
+        buttons.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
 
-    <script>
-        function selectProduct(cardIndex, area, text) {
-            // Подсветка активной кнопки
-            document.querySelectorAll('.area-card').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Вывод описания
-            const resultBox = document.getElementById('result');
-            resultBox.innerHTML = '<strong>Для площади ' + area + ' м²:</strong><br>' + text;
-            resultBox.style.display = 'block';
-
-            // Сброс старой подсветки карточек
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => card.classList.remove('highlight'));
-
-            // Подсветка выбранной карточки и скролл к ней
-            if(cards[cardIndex]) {
-                cards[cardIndex].classList.add('highlight');
-                setTimeout(() => {
-                    cards[cardIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 150);
+        // Фильтруем карточки товаров
+        const cards = document.querySelectorAll('.product-card');
+        cards.forEach(card => {
+            if (capacity === 'all') {
+                card.classList.remove('hidden');
+            } else {
+                if (card.getAttribute('data-capacity') === capacity) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
             }
-        }
-    </script>
+        });
+    }
+</script>
 
-</body>
-</html>
 
