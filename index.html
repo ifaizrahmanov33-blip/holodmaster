@@ -1,454 +1,270 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ХолодМастер — Каталог Климатической Техники</title>
-    <style>
-        :root {
-            --primary-color: #0056b3;
-            --secondary-color: #ffc107;
-            --gold-premium: #d4af37;
-            --gold-light: #f3e5ab;
-            --dark-bg: #111;
-            --card-bg: #ffffff;
-            --text-dark: #333;
-            --badge-budget: #28a745;
-            --badge-comfort: #17a2b8;
-            --badge-premium: #6f42c1;
+.footer-big-btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Roboto, sans-serif;
-            background-color: #f8f9fa;
-            color: var(--text-dark);
-        }
-
-        /* КАТАЛОГ СЕКЦИЯ */
-        .catalog-section {
-            padding: 60px 20px;
-        }
-        .catalog-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .catalog-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-        .catalog-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 40px;
-        }
-
-        /* КНОПКИ ФИЛЬТРОВ */
-        .filter-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            padding: 10px 20px;
-            border: 1px solid #ddd;
-            background: #fff;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary-color);
-            color: #fff;
-            border-color: var(--primary-color);
-        }
-
-        /* СЕТКА ТОВАРОВ */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        .product-card {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            border: 1px solid #eee;
-            transition: transform 0.3s ease;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-        .badge-container {
-            display: flex;
-            gap: 5px;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-        }
-        .badge {
-            padding: 5px 10px;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        .badge.budget { background: var(--badge-budget); }
-        .badge.comfort { background: var(--badge-comfort); }
-        .badge.premium { background: var(--badge-premium); }
-        .badge.inverter { background: #343a40; }
-        
-        .product-icon {
-            text-align: center;
-            font-size: 50px;
-            color: #74c0fc;
-            margin: 20px 0;
-        }
-        .brand-tag {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #888;
-            letter-spacing: 1px;
-            font-weight: bold;
-        }
-        .product-name {
-            font-size: 20px;
-            margin: 5px 0 15px 0;
-            font-weight: 700;
-        }
-        .specs-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 20px 0;
-            font-size: 14px;
-            color: #555;
-        }
-        .specs-list li {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-        .specs-list li::before {
-            content: "✓";
-            color: #28a745;
-            margin-right: 8px;
-            font-weight: bold;
-        }
-        .price-box {
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            margin-bottom: 15px;
-        }
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
-        .price-value {
-            font-weight: 700;
-            color: #111;
-        }
-        .price-total {
-            color: var(--primary-color);
-            font-size: 16px;
-        }
-        .btn-order {
-            display: block;
-            text-align: center;
-            background: var(--primary-color);
-            color: #fff;
-            text-decoration: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background 0.3s ease;
-        }
-        .btn-order:hover {
-            background: #004085;
-        }
-
-        /* ПРЕМИАЛЬНАЯ СЕКЦИЯ БРЕНДОВ */
-        .brands-section {
-            background: linear-gradient(135deg, #ffffff 0%, #fcfbfa 100%);
-            padding: 90px 20px;
-            text-align: center;
-            border-top: 1px solid #eaeaea;
-        }
-        .brands-title {
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #1a1a1a;
-            margin-bottom: 10px;
-        }
-        .brands-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--gold-premium), var(--gold-light));
-            margin: 15px auto 0;
-        }
-        .brands-subtitle {
-            font-size: 16px;
-            color: #777;
-            margin-bottom: 50px;
-        }
-        .brands-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 20px;
-        }
-        .brand-card {
-            background: #ffffff;
-            border: 1px solid #eaeaea;
-            border-radius: 8px;
-            padding: 35px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-weight: 700;
-            color: #666;
-            font-size: 17px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
-        }
-        .brand-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold-premium);
-            color: var(--gold-premium);
-            box-shadow: 0 12px 24px rgba(212, 175, 55, 0.18);
+        .copyright {
+            margin-top: 60px;
+            font-size: 13px;
+            color: #64748b;
         }
     </style>
 </head>
 <body>
 
+    <nav class="navbar">
+        <div class="logo-box">
+            <div class="brand-name">CLIMAT <span>MASTER</span></div>
+            <div class="brand-sub">Премиальный климат под ключ</div>
+        </div>
+        <div class="nav-right">
+            <a href="tel:+79991112233" class="nav-phone">+7 (999) 111-22-33</a>
+            <div class="social-buttons">
+                <a href="https://wa.me/79991112233" class="social-btn wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://t.me/your_telegram" class="social-btn tg" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-container">
+            <div class="hero-badge">Инженерный подход с 2014 года</div>
+            <h1 class="hero-title">Профессиональное проектирование и чистый монтаж систем кондиционирования</h1>
+            <p class="hero-desc">Реализуем климатические решения любой сложности для квартир, загородных домов и офисов. Гарантируем строжайший контроль стандартов качества.</p>
+            
+            <div class="standards-grid">
+                <div class="standard-card">
+                    <div class="standard-icon"><i class="fas fa-layer-group"></i></div>
+                    <h4>Толстостенная медь</h4>
+                    <p>Применяем исключительно медные трубы премиум-стандарта (ГОСТ). Никаких дешевых аналогов и заломов трассы.</p>
+                </div>
+                <div class="standard-card">
+                    <div class="standard-icon"><i class="fas fa-wind"></i></div>
+                    <h4>Глубокое вакуумирование</h4>
+                    <p>100% удаление влаги, неконденсируемых веществ и воздуха из фреонового контура перед каждым пуском компрессора.</p>
+                </div>
+                <div class="standard-card">
+                    <div class="standard-icon"><i class="fas fa-broom"></i></div>
+                    <h4>Монтаж без пыли и грязи</h4>
+                    <p>Алмазное бурение отверстий выполняется строго в связке с мощным промышленным строительным пылесосом.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <section class="catalog-section" id="catalog-anchor">
         <div class="catalog-container">
-            <h1 class="catalog-title">Каталог климатических систем</h1>
-            <p class="catalog-subtitle">Цены действительны для наших подписчиков. В стоимость «Под ключ» уже включен профессиональный чистый монтаж!</p>
+            <div class="section-header">
+                <h2 class="section-title">Каталог климатических систем</h2>
+                <p class="section-subtitle">Оригинальная сертифицированная техника. В стоимость «Под ключ» уже включен стандартный высококлассный монтаж.</p>
+            </div>
             
             <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterArea('all')">Все модели</button>
-                <button class="filter-btn" onclick="filterArea('20')">До 20 м² (07)</button>
-                <button class="filter-btn" onclick="filterArea('25')">До 25 м² (09)</button>
-                <button class="filter-btn" onclick="filterArea('35')">До 35 м² (12)</button>
-                <button class="filter-btn" onclick="filterArea('50')">До 50 м² (18)</button>
-                <button class="filter-btn" onclick="filterArea('70')">До 70 м² (24)</button>
+                <button class="filter-btn active" onclick="filterArea('all')">Все предложения</button>
+                <button class="filter-btn" onclick="filterArea('20')">Площадь до 20 м² (07)</button>
+                <button class="filter-btn" onclick="filterArea('25')">Площадь до 25 м² (09)</button>
+                <button class="filter-btn" onclick="filterArea('35')">Площадь до 35 м² (12)</button>
+                <button class="filter-btn" onclick="filterArea('50')">Площадь до 50 м² (18)</button>
+                <button class="filter-btn" onclick="filterArea('70')">Площадь до 70 м² (24)</button>
             </div>
 
             <div class="products-grid" id="products-container">
                 
                 <div class="product-card" data-area="20" data-brand="Hisense">
-                    <div class="badge-container">
-                        <span class="badge budget">Бюджет</span>
-                    </div>
-                    <div class="product-icon">❄️</div>
+                    <div class="badge-container"><span class="badge budget">Бюджет</span></div>
+<div class="product-img-box"><i class="fas fa-snowflake"></i></div>
                     <div>
                         <div class="brand-tag">Hisense</div>
                         <h3 class="product-name">Neo Classic A 07</h3>
                         <ul class="specs-list">
-                            <li>Тип: Настенный сплит</li>
-                            <li>Энергоэффективность класса A</li>
-                            <li>4D автоматическое распределение воздуха</li>
-                            <li>Ультратихий режим работы</li>
+                            <li>Тип системы: Настенный сплит</li>
+                            <li>Высокий класс энергоэффективности (A)</li>
+                            <li>4D автоматическое управление жалюзи</li>
                         </ul>
                     </div>
                     <div>
                         <div class="price-box">
                             <div class="price-row"><span>Оборудование:</span><span class="price-value">22 490 ₽</span></div>
-                            <div class="price-row" style="font-weight:bold;"><span>Под ключ с монтажом:</span><span class="price-value price-total">37 490 ₽</span></div>
+                            <div class="price-row" style="font-weight:bold;"><span>Монтаж под ключ:</span><span class="price-value price-total">37 490 ₽</span></div>
                         </div>
-                        <a href="https://t.me/your_telegram" class="btn-order">Заказать через Telegram</a>
+                        <a href="tel:+79991112233" class="btn-order-click">Позвонить мастеру</a>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/79991112233" class="btn-social-order wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://t.me/your_telegram" class="btn-social-order tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="product-card" data-area="25" data-brand="Hisense">
-                    <div class="badge-container">
-                        <span class="badge comfort">Комфорт</span>
-                        <span class="badge inverter">Инвертор</span>
-                    </div>
-                    <div class="product-icon">❄️</div>
+                    <div class="badge-container"><span class="badge comfort">Комфорт</span><span class="badge inverter">Инвертор</span></div>
+                    <div class="product-img-box"><i class="fas fa-snowflake"></i></div>
                     <div>
                         <div class="brand-tag">Hisense</div>
                         <h3 class="product-name">AS-09UW4RYRKB00</h3>
                         <ul class="specs-list">
-                            <li>Тип: Настенный сплит</li>
-                            <li>Надежный инверторный компрессор</li>
-                            <li>Комплексная очистка воздуха</li>
-                            <li>Стабильная работа на обогрев до -15°C</li>
+                            <li>Тип системы: Настенный сплит</li>
+                            <li>Надежная инверторная технология</li>
+                            <li>Плазменная очистка воздуха</li>
                         </ul>
                     </div>
                     <div>
                         <div class="price-box">
                             <div class="price-row"><span>Оборудование:</span><span class="price-value">34 990 ₽</span></div>
-                            <div class="price-row" style="font-weight:bold;"><span>Под ключ с монтажом:</span><span class="price-value price-total">49 990 ₽</span></div>
+                            <div class="price-row" style="font-weight:bold;"><span>Монтаж под ключ:</span><span class="price-value price-total">49 990 ₽</span></div>
                         </div>
-                        <a href="https://t.me/your_telegram" class="btn-order">Заказать через Telegram</a>
+                        <a href="tel:+79991112233" class="btn-order-click">Позвонить мастеру</a>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/79991112233" class="btn-social-order wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://t.me/your_telegram" class="btn-social-order tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="product-card" data-area="20" data-brand="MBO">
-                    <div class="badge-container">
-                        <span class="badge budget">Бюджет</span>
-                    </div>
-                    <div class="product-icon">❄️</div>
+                    <div class="badge-container"><span class="badge budget">Бюджет</span></div>
+                    <div class="product-img-box"><i class="fas fa-snowflake"></i></div>
                     <div>
                         <div class="brand-tag">MBO</div>
                         <h3 class="product-name">Серия M-1 (07)</h3>
                         <ul class="specs-list">
-                            <li>Тип: Настенный сплит</li>
+                            <li>Тип системы: Настенный сплит</li>
                             <li>Японский компрессор (GMCC/Toshiba)</li>
-                            <li>Антикоррозийное покрытие Golden Fin</li>
-                            <li>Качественный пластик корпуса</li>
+<li>Защитное покрытие теплообменника Golden Fin</li>
                         </ul>
                     </div>
                     <div>
                         <div class="price-box">
                             <div class="price-row"><span>Оборудование:</span><span class="price-value">19 900 ₽</span></div>
-                            <div class="price-row" style="font-weight:bold;"><span>Под ключ с монтажом:</span><span class="price-value price-total">34 900 ₽</span></div>
+                            <div class="price-row" style="font-weight:bold;"><span>Монтаж под ключ:</span><span class="price-value price-total">34 900 ₽</span></div>
                         </div>
-                        <a href="https://t.me/your_telegram" class="btn-order">Заказать через Telegram</a>
+                        <a href="tel:+79991112233" class="btn-order-click">Позвонить мастеру</a>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/79991112233" class="btn-social-order wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://t.me/your_telegram" class="btn-social-order tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="product-card" data-area="25" data-brand="Royal Clima">
-                    <div class="badge-container">
-                        <span class="badge comfort">Комфорт</span>
-                    </div>
-                    <div class="product-icon">❄️</div>
+                    <div class="badge-container"><span class="badge comfort">Комфорт</span></div>
+                    <div class="product-img-box"><i class="fas fa-snowflake"></i></div>
                     <div>
                         <div class="brand-tag">Royal Clima</div>
                         <h3 class="product-name">Gloria 07</h3>
                         <ul class="specs-list">
-                            <li>Тип: Настенный сплит</li>
-                            <li>Эффективная ионизация воздуха</li>
-                            <li>Элегантный скрытый LED-дисплей</li>
-                            <li>Низкий уровень шума</li>
+                            <li>Тип системы: Настенный сплит</li>
+                            <li>Встроенный активный генератор ионов</li>
+                            <li>Изящный скрытый цифровой LED-дисплей</li>
                         </ul>
                     </div>
                     <div>
                         <div class="price-box">
                             <div class="price-row"><span>Оборудование:</span><span class="price-value">24 190 ₽</span></div>
-                            <div class="price-row" style="font-weight:bold;"><span>Под ключ с монтажом:</span><span class="price-value price-total">39 190 ₽</span></div>
+                            <div class="price-row" style="font-weight:bold;"><span>Монтаж под ключ:</span><span class="price-value price-total">39 190 ₽</span></div>
                         </div>
-                        <a href="https://t.me/your_telegram" class="btn-order">Заказать через Telegram</a>
+                        <a href="tel:+79991112233" class="btn-order-click">Позвонить мастеру</a>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/79991112233" class="btn-social-order wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://t.me/your_telegram" class="btn-social-order tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="product-card" data-area="50" data-brand="Royal Clima">
-                    <div class="badge-container">
-                        <span class="badge premium">Полупром</span>
-                    </div>
-                    <div class="product-icon">💨</div>
+                    <div class="badge-container"><span class="badge premium">Полупром</span></div>
+                    <div class="product-img-box"><i class="fas fa-wind"></i></div>
                     <div>
                         <div class="brand-tag">Royal Clima</div>
-                        <h3 class="product-name">CO-4C 18HN (Кассетный)</h3>
+                        <h3 class="product-name">CO-4C 18HN (Кассета)</h3>
                         <ul class="specs-list">
-                            <li>Тип: Кассетная сплит-система</li>
-                            <li>Круговое распределение воздуха на 360°</li>
-                            <li>Встроенный дренажный насос</li>
-                            <li>Для коммерческих и больших жилых помещений</li>
+                            <li>Тип системы: Кассетный полупромышленный</li>
+                            <li>Равномерный круговой обдув на 360°</li>
+                            <li>Встроенный насос отвода конденсата</li>
                         </ul>
                     </div>
                     <div>
                         <div class="price-box">
                             <div class="price-row"><span>Оборудование:</span><span class="price-value">58 900 ₽</span></div>
-                            <div class="price-row" style="font-weight:bold;"><span>Под ключ с монтажом:</span><span class="price-value price-total">78 900 ₽</span></div>
+                            <div class="price-row" style="font-weight:bold;"><span>Монтаж под ключ:</span><span class="price-value price-total">78 900 ₽</span></div>
+</div>
+                        <a href="tel:+79991112233" class="btn-order-click">Позвонить мастеру</a>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/79991112233" class="btn-social-order wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://t.me/your_telegram" class="btn-social-order tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
                         </div>
-                        <a href="https://t.me/your_telegram" class="btn-order">Заказать через Telegram</a>
                     </div>
                 </div>
 
                 <div class="product-card" data-area="25" data-brand="Funai">
-                    <div class="badge-container">
-                        <span class="badge comfort">Комфорт</span>
-                        <span class="badge inverter">Инвертор</span>
-                    </div>
-                    <div class="product-icon">❄️</div>
+                    <div class="badge-container"><span class="badge comfort">Комфорт</span><span class="badge inverter">Инвертор</span></div>
+                    <div class="product-img-box"><i class="fas fa-snowflake"></i></div>
                     <div>
                         <div class="brand-tag">Funai</div>
                         <h3 class="product-name">Sakura E-Inverter 09</h3>
                         <ul class="specs-list">
-                            <li>Тип: Настенный сплит</li>
-                            <li>Премиальный японский инвертор</li>
-                            <li>Супернизкий уровень шума (от 19 дБ)</li>
-                            <li>Многоступенчатая фильтрация</li>
+                            <li>Тип системы: Настенный сплит</li>
+                            <li>Технологичная японская инверторная плата</li>
+                            <li>Шумоизоляция компрессора наружного блока</li>
                         </ul>
                     </div>
                     <div>
                         <div class="price-box">
                             <div class="price-row"><span>Оборудование:</span><span class="price-value">38 990 ₽</span></div>
-                            <div class="price-row" style="font-weight:bold;"><span>Под ключ с монтажом:</span><span class="price-value price-total">53 990 ₽</span></div>
+                            <div class="price-row" style="font-weight:bold;"><span>Монтаж под ключ:</span><span class="price-value price-total">53 990 ₽</span></div>
                         </div>
-                        <a href="https://t.me/your_telegram" class="btn-order">Заказать через Telegram</a>
+                        <a href="tel:+79991112233" class="btn-order-click">Позвонить мастеру</a>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/79991112233" class="btn-social-order wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://t.me/your_telegram" class="btn-social-order tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="product-card" data-area="20" data-brand="Daikin">
-                    <div class="badge-container">
-                        <span class="badge premium">Премиум</span>
-                        <span class="badge inverter">Инвертор</span>
-                    </div>
-                    <div class="product-icon">❄️</div>
+                    <div class="badge-container"><span class="badge premium">Премиум</span><span class="badge inverter">Инвертор</span></div>
+                    <div class="product-img-box"><i class="fas fa-snowflake"></i></div>
                     <div>
                         <div class="brand-tag">Daikin</div>
                         <h3 class="product-name">Sensira FTXF20</h3>
                         <ul class="specs-list">
-                            <li>Тип: Настенный сплит</li>
-                            <li>Эталон надежности и качества сборки</li>
-                            <li>Максимальное энергосбережение (A++)</li>
-                            <li>Многоступенчатая очистка воздуха</li>
+                            <li>Тип системы: Настенный сплит</li>
+                            <li>Мировой лидер надежности климата</li>
+                            <li>Наивысшая энергоэффективность A++</li>
                         </ul>
                     </div>
                     <div>
                         <div class="price-box">
                             <div class="price-row"><span>Оборудование:</span><span class="price-value">72 000 ₽</span></div>
-                            <div class="price-row" style="font-weight:bold;"><span>Под ключ с монтажом:</span><span class="price-value price-total">87 000 ₽</span></div>
+                            <div class="price-row" style="font-weight:bold;"><span>Монтаж под ключ:</span><span class="price-value price-total">87 000 ₽</span></div>
                         </div>
-                        <a href="https://t.me/your_telegram" class="btn-order">Заказать через Telegram</a>
+                        <a href="tel:+79991112233" class="btn-order-click">Позвонить мастеру</a>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/79991112233" class="btn-social-order wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://t.me/your_telegram" class="btn-social-order tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="product-card" data-area="70" data-brand="Ballu">
-                    <div class="badge-container">
-                        <span class="badge premium">Полупром</span>
-                    </div>
-                    <div class="product-icon">💨</div>
+<div class="product-card" data-area="70" data-brand="Ballu">
+                    <div class="badge-container"><span class="badge premium">Полупром</span></div>
+                    <div class="product-img-box"><i class="fas fa-wind"></i></div>
                     <div>
                         <div class="brand-tag">Ballu</div>
-                        <h3 class="product-name">BDA-24HN1 (Канальный)</h3>
+                        <h3 class="product-name">BDA-24HN1 (Канал)</h3>
                         <ul class="specs-list">
-                            <li>Тип: Канальная сплит-система</li>
-                            <li>Скрытая установка в систему воздуховодов</li>
-                            <li>Высокое статическое давление</li>
+                            <li>Тип системы: Канальный скрытый полупром</li>
+                            <li>Скрытый монтаж за подвесным потолком</li>
                             <li>Возможность подмеса свежего воздуха</li>
                         </ul>
                     </div>
                     <div>
                         <div class="price-box">
                             <div class="price-row"><span>Оборудование:</span><span class="price-value">74 200 ₽</span></div>
-                            <div class="price-row" style="font-weight:bold;"><span>Под ключ с монтажом:</span><span class="price-value price-total">99 200 ₽</span></div>
+                            <div class="price-row" style="font-weight:bold;"><span>Монтаж под ключ:</span><span class="price-value price-total">99 200 ₽</span></div>
                         </div>
-                        <a href="https://t.me/your_telegram" class="btn-order">Заказать через Telegram</a>
+                        <a href="tel:+79991112233" class="btn-order-click">Позвонить мастеру</a>
+                        <div class="action-buttons">
+                            <a href="https://wa.me/79991112233" class="btn-social-order wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                            <a href="https://t.me/your_telegram" class="btn-social-order tg" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                        </div>
                     </div>
                 </div>
 
@@ -457,35 +273,108 @@
     </section>
 
     <section class="brands-section">
-        <h2 class="brands-title">НАШИ БРЕНДЫ</h2>
-        <p class="brands-subtitle">Нажмите на интересующий бренд, чтобы мгновенно отфильтровать каталог под производителя</p>
+        <div class="section-header">
+            <h2 class="section-title">Официальный дилер ведущих марок</h2>
+            <p class="section-subtitle">Оригинальные графические логотипы. Нажмите на бренд для автоматического поиска моделей в нашем каталоге.</p>
+        </div>
         
         <div class="brands-grid">
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Hisense')">Hisense</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('MBO')">MBO</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('LG')">LG</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Royal Clima')">Royal Clima</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('MDV')">MDV</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Funai')">Funai</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Energolux')">Energolux</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Electrolux')">Electrolux</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Ballu')">Ballu</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('AUX')">AUX</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Rovex')">Rovex</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Mitsubishi')">Mitsubishi</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Daikin')">Daikin</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Toshiba')">Toshiba</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Midea')">Midea</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Dantex')">Dantex</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('Ferrum')">Ferrum</a>
-            <a href="#catalog-anchor" class="brand-card" onclick="filterBrand('IGC')">IGC</a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Hisense')">
+                <img src="https://mircli.ru/images/brands/hisense.png" alt="Hisense" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Hisense</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('MBO')">
+                <img src="https://mircli.ru/images/brands/mbo.png" alt="MBO" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>MBO</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('LG')">
+                <img src="https://mircli.ru/images/brands/lg.png" alt="LG" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>LG</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Royal Clima')">
+                <img src="https://mircli.ru/images/brands/royal_clima.png" alt="Royal Clima" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Royal Clima</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('MDV')">
+                <img src="https://mircli.ru/images/brands/mdv.png" alt="MDV" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>MDV</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Funai')">
+                <img src="https://mircli.ru/images/brands/funai.png" alt="Funai" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Funai</span>
+</a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Energolux')">
+                <img src="https://mircli.ru/images/brands/energolux.png" alt="Energolux" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Energolux</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Electrolux')">
+                <img src="https://mircli.ru/images/brands/electrolux.png" alt="Electrolux" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Electrolux</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Ballu')">
+                <img src="https://mircli.ru/images/brands/ballu.png" alt="Ballu" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Ballu</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('AUX')">
+                <img src="https://mircli.ru/images/brands/aux.png" alt="AUX" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>AUX</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Rovex')">
+                <img src="https://mircli.ru/images/brands/rovex.png" alt="Rovex" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Rovex</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Mitsubishi')">
+                <img src="https://mircli.ru/images/brands/mitsubishi_electric.png" alt="Mitsubishi" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Mitsubishi</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Daikin')">
+                <img src="https://mircli.ru/images/brands/daikin.png" alt="Daikin" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Daikin</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Toshiba')">
+                <img src="https://mircli.ru/images/brands/toshiba.png" alt="Toshiba" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Toshiba</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Midea')">
+                <img src="https://mircli.ru/images/brands/midea.png" alt="Midea" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Midea</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Dantex')">
+                <img src="https://mircli.ru/images/brands/dantex.png" alt="Dantex" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Dantex</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('Ferrum')">
+                <img src="https://mircli.ru/images/brands/ferrum.png" alt="Ferrum" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>Ferrum</span>
+            </a>
+            <a href="#catalog-anchor" class="brand-logo-card" onclick="filterBrand('IGC')">
+                <img src="https://mircli.ru/images/brands/igc.png" alt="IGC" class="brand-logo-img" onerror="this.style.display='none'">
+                <span>IGC</span>
+            </a>
         </div>
     </section>
 
+    <footer class="footer-section">
+        <div class="footer-container">
+            <h2 class="footer-title">Не нашли нужную комплектацию?</h2>
+            <p class="footer-desc">Свяжитесь с инженером напрямую. Подберем оптимальную систему по техническому заданию, рассчитаем точную стоимость под ключ и согласуем выезд.</p>
+<div class="footer-phone-block">
+                <a href="tel:+79991112233">+7 (999) 111-22-33</a>
+            </div>
+            
+            <div class="footer-social-row">
+                <a href="https://wa.me/79991112233" class="footer-big-btn wa" target="_blank"><i class="fab fa-whatsapp"></i> Написать в WhatsApp</a>
+                <a href="https://t.me/your_telegram" class="footer-big-btn tg" target="_blank"><i class="fab fa-telegram-plane"></i> Написать в Telegram</a>
+            </div>
+            
+            <div class="copyright">
+                &copy; Climat Master, 2026. Профессиональные климатические решения. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Фильтр по площади
         function filterArea(area) {
-            // Меняем активную кнопку
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
@@ -500,7 +389,6 @@
             });
         }
 
-        // Умная логика для бренд-стены (Клик по бренду)
         function filterBrand(brandName) {
             const cards = document.querySelectorAll('.product-card');
             let found = false;
@@ -514,13 +402,12 @@
                 }
             });
 
-            // Сбрасываем кнопки площади в положение "Все", так как мы ищем конкретный бренд
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             buttons[0].classList.add('active');
 
             if(!found) {
-                alert(`Кондиционеры бренда ${brandName} сейчас обновляются на сервере и скоро появятся в выдаче!`);
+                alert(Модели бренда ${brandName} сейчас проходят плановую синхронизацию цен с базой данных MirCli и появятся на сайте в течение нескольких минут!);
             }
         }
     </script>
